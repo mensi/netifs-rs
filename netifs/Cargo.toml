@@ -1,0 +1,19 @@
+[package]
+name = "netifs"
+version = "0.1.0"
+authors = ["Manuel Stocker <mensi@mensi.ch>"]
+edition = "2018"
+description = "Cross-platform utility library to enumerate local network interfaces."
+readme = "../README.md"
+keywords = ["networking"]
+categories = ["network-programming"]
+homepage = "https://github.com/mensi/netifs-rs"
+repository = "https://github.com/mensi/netifs-rs"
+license = "Apache-2.0"
+
+[dependencies]
+winapi = { version = "0.3.8", features = ["minwindef", "winerror", "ifdef", "ws2def", "ws2ipdef"] }
+libc = "0.2"
+eui48 = "0.5"
+ipnetwork = "0.16.0"
+widestring = "0.4.0"

@@ -1,0 +1,10 @@
+[workspace]
+
+members = [
+    "netifs",
+    "netifs-cli",
+]
+
+[patch.crates-io]
+netifs = { path = './netifs' }
+netifs-cli = { path = './netifs-cli' }
