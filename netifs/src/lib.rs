@@ -35,7 +35,9 @@ pub struct Interface {
     pub name: String,
     pub display_name: String,
     pub ip_addresses: Vec<IpNetwork>,
-    pub mac_address: Option<MacAddress>
+    pub mac_address: Option<MacAddress>,
+    pub is_loopback: bool,
+    pub is_up: bool,
 }
 
 impl Interface {
@@ -45,7 +47,9 @@ impl Interface {
             name: name.clone(),
             display_name: name,
             ip_addresses: Vec::new(),
-            mac_address: None
+            mac_address: None,
+            is_loopback: false,
+            is_up: false,
         }
     }
 }

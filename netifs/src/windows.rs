@@ -7,6 +7,7 @@ use winapi::shared::ntdef::{ULONG, PVOID};
 use winapi::shared::ws2def::{AF_INET, AF_INET6, SOCKADDR_IN};
 use winapi::shared::ws2ipdef::SOCKADDR_IN6_LH;
 use crate::winapi_um_iptypes::*; // TODO replace with upstream winapi once released.
+use crate::winapi_shared_ifdef::IfOperStatusUp; // TODO replace with upstream winapi once released.
 
 use widestring::U16CString;
 
@@ -46,6 +47,12 @@ pub fn get_interfaces() -> Result<Vec<Interface>, String> {
             let name = cstr_to_string(a.AdapterName);
             let mut interface = Interface::new(name);
             interface.display_name = U16CString::from_ptr_str(a.Description).to_string_lossy();
+            if a.IfType == 24 {
+                interface.is_loopback = true;
+            }
+            if a.OperStatus == IfOperStatusUp {
+                interface.is_up = true;
+            }
 
             if a.PhysicalAddressLength == 0 {
                 // 0 indicates no MAC address, eg. on the loopback

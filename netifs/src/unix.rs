@@ -22,6 +22,12 @@ pub fn get_interfaces() -> Result<Vec<Interface>, String> {
             let name = cstr_to_string(addr.ifa_name);
 
             let interface = res.entry(name.clone()).or_insert(Interface::new(name.clone()));
+            if addr.ifa_flags & libc::IFF_LOOPBACK as u32 != 0 {
+                interface.is_loopback = true;
+            }
+            if addr.ifa_flags & libc::IFF_UP as u32 != 0 {
+                interface.is_up = true;
+            }
 
             match (*addr.ifa_addr).sa_family as libc::c_int {
                 libc::AF_PACKET => {
