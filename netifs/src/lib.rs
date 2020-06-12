@@ -30,7 +30,7 @@ mod winapi_um_iptypes;
 mod winapi_shared_ifdef;
 
 /// Represents a network interface.
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Interface {
     pub name: String,
     pub display_name: String,
